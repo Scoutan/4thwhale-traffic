@@ -7,6 +7,21 @@
   border-radius: 6px;
 }
 
+.cardRed {
+  background: #FFD3D3;
+  border: 1px solid #FF1B1B;
+}
+
+.cardYellow {
+  background: #FFF2C5;
+  border: 1px solid #FFCD1B;
+}
+
+.cardGreen {
+  background: #DDFFE4;
+  border: 1px solid #00D12E;
+}
+
 .trafficLight {
   display: flex;
   flex-direction: column;
@@ -25,31 +40,58 @@
   border-radius: 6px;
 }
 
+.trafficRed {
+  border: 1px solid #930101;
+}
+
+.trafficYellow {
+  border: 1px solid #8E7004;
+}
+
+.trafficGreen {
+  border: 1px solid #005012;
+}
+
 .lightRed, .lightYellow, .lightGreen {
-  position: static;
+  position: relative;
   width: 24px;
   height: 24px;
-  left: 25px;
-  top: 20px;
-
   background: #C4C4C4;
   border-radius: 15px;
-
   flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 16px 0px;
+  margin: 10px 0px;
+}
+
+.lightRedOn {
+  background: #FF1B1B;
+  box-shadow: 0px 0px 10px #FF1B1B;
+}
+
+.lightYellowOn {
+  background: #FFCD1B;
+  box-shadow: 0px 0px 10px #FFCD1B;
+}
+
+.lightGreenOn {
+  background: #00D12E;
+  box-shadow: 0px 0px 10px #00D12E;
 }
 
 .label {
-  position: absolute;
-  width: 200px;
-  height: 35px;
-  left: 80px;
+  position: relative;
   top: 234px;
-
-  font-weight: 300;
   font-size: 30px;
-  line-height: 35px;
   text-align: center;
+}
+
+.labelRed {
+  color: #930101;
+}
+
+.labelYellow {
+  color: #8E7004;
+}
+
+.labelGreen {
+  color: #005012;
 }
