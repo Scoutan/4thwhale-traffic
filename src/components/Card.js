@@ -24,9 +24,9 @@ export default function Card({ colors }) {
   return (
     <div className={`${styles.card} ${classes.myCard}`}>
       <div className={`${styles.trafficLight} ${classes.myTraffic}`}>
-        <div className={`${styles.lightRed} ${colors.id == 'red' ? classes.myLight : null}`}></div>
-        <div className={`${styles.lightYellow} ${colors.id == 'yellow' ? classes.myLight : null}`}></div>
-        <div className={`${styles.lightGreen} ${colors.id == 'green' ? classes.myLight : null}`}></div>
+        <div className={`${styles.lightRed} ${colors.id === 'red' ? classes.myLight : null}`}></div>
+        <div className={`${styles.lightYellow} ${colors.id === 'yellow' ? classes.myLight : null}`}></div>
+        <div className={`${styles.lightGreen} ${colors.id === 'green' ? classes.myLight : null}`}></div>
       </div>
       <div className={`${styles.label} ${classes.myLabel}`}>
         The light is {colors.id}.
