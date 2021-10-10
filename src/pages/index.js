@@ -1,54 +1,102 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Head from 'next/head'
 import Card from '../components/Card'
 import styles from '../../styles/Home.module.css'
 
 export default function Home() {
+  // const colors = {
+  //   red: {
+  //     id: "red",
+  //     duration: 8000,
+  //     shade: "#FFD3D3",
+  //     light: "#FF1B1B",
+  //     font: "#930101",
+  //   },
+  //   yellow: {
+  //     id: "yellow",
+  //     duration: 4000,
+  //     shade: "#FFF2C5",
+  //     light: "#FFCD1B",
+  //     font: "#8E7004",
+  //   },
+  //   green: {
+  //     id: "green",
+  //     duration: 8000,
+  //     shade: "#DDFFE4",
+  //     light: "#00D12E",
+  //     font: "#005012",
+  //   }
+  // }
+
   const colors = {
-    red: {
-      id: 'red',
-      shade: "#FFD3D3",
-      light: "#FF1B1B",
-      font: "#930101",
-    },
-    yellow: {
-      id: 'yellow',
-      shade: "#FFF2C5",
-      light: "#FFCD1B",
-      font: "#8E7004",
-    },
-    green: {
-      id: 'green',
-      shade: "#DDFFE4",
-      light: "#00D12E",
-      font: "#005012",
-    }
+    red: 0,
+    yellow: 1,
+    green: 2,
   }
 
   const [currentLight, setCurrentLight] = useState(colors.red);
-  const [loop, setLoop] = useState(false);
+  const [count, setCount] = useState(0);
+  const savedCallback = useRef();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
+  const changeLight = () => {
+    setCount(count + 1);
+
+    if (count === 7)
       setCurrentLight(colors.green);
-    }, 8000);
-    return () => clearTimeout(timer);
-  }, [loop]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
+    if (count === 15)
       setCurrentLight(colors.yellow);
-    }, 16000);
-    return () => clearTimeout(timer);
-  }, [loop]);
+    if (count === 19) {
+      setCurrentLight(colors.red);
+      setCount(0);
+    }
+  }
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setCurrentLight(colors.red);
-      setLoop(!loop);
-    }, 20000);
-    return () => clearTimeout(timer);
-  }, [loop]);
+    savedCallback.current = changeLight;
+  })
+
+  useEffect(() => {
+    const timer = setInterval(() => savedCallback.current(), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // const [currentLight, setCurrentLight] = useState(colors.red);  
+  // const [loop, setLoop] = useState(false);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setCurrentLight(colors.green);
+  //     setTimeout(() => {
+  //       setCurrentLight(colors.yellow);
+  //       setTimeout(() => {
+  //         setCurrentLight(colors.red);
+  //         setLoop(!loop);
+  //       }, 4000);
+  //     }, 8000);
+  //   }, 8000)
+  // }, [loop]);
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setCurrentLight(colors.green);
+  //   }, 8000);
+  //   return () => clearTimeout(timer);
+  // }, [loop]);
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setCurrentLight(colors.yellow);
+  //   }, 16000);
+  //   return () => clearTimeout(timer);
+  // }, [loop]);
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setCurrentLight(colors.red);
+  //     setLoop(!loop);
+  //   }, 20000);
+  //   return () => clearTimeout(timer);
+  // }, [loop]);
 
   return (
     <div className={styles.container}>
