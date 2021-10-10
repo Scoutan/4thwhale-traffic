@@ -1,8 +1,55 @@
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Card from '../components/Card'
+import styles from '../../styles/Home.module.css'
 
 export default function Home() {
+  const colors = {
+    red: {
+      id: 'red',
+      shade: "#FFD3D3",
+      light: "#FF1B1B",
+      font: "#930101",
+    },
+    yellow: {
+      id: 'yellow',
+      shade: "#FFF2C5",
+      light: "#FFCD1B",
+      font: "#8E7004",
+    },
+    green: {
+      id: 'green',
+      shade: "#DDFFE4",
+      light: "#00D12E",
+      font: "#005012",
+    }
+  }
+
+  const [currentLight, setCurrentLight] = useState(colors.red);
+  const [loop, setLoop] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentLight(colors.green);
+    }, 8000);
+    return () => clearTimeout(timer);
+  }, [loop]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentLight(colors.yellow);
+    }, 16000);
+    return () => clearTimeout(timer);
+  }, [loop]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentLight(colors.red);
+      setLoop(!loop);
+    }, 20000);
+    return () => clearTimeout(timer);
+  }, [loop]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,16 +59,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div className={styles.card}>
-          <div className={styles.trafficLight}>
-            <div className={styles.lightRed}></div>
-            <div className={styles.lightYellow}></div>
-            <div className={styles.lightGreen}></div>
-          </div>
-          <div className={styles.label}>
-            The light is red.
-          </div>
-        </div>
+        <Card
+          colors={currentLight}
+        />
       </main>
 
       <footer className={styles.footer}>
