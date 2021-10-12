@@ -1,5 +1,4 @@
 <h1>4th Whale Traffic Lights</h1>
-<hr>
 <h3>1st approach</h3>
 <p>
   After building the layout and design of the 3 traffic lights, I thought it would be convenient to use CSS-in-JS to directly pass props to style the light's illumination based on a timer. So I researched a bit and opt to try React-JSS. It was mostly fine but I would get a class name mismatch error, indicating server and client have mismatched class names. After a bit of digging on Google, I found out that, with nextjs, we would need to make the let Server Side Rendering (SSR) handle the CSS but I could not resolve the issue after attempting a few solutions. So I decided to simply use CSS modules.
